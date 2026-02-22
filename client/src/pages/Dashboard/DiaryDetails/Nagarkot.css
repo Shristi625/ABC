@@ -1,0 +1,533 @@
+/* Nagarkot Diary Styles - Professional Layout */
+
+.nagarkot-diary {
+  min-height: 100vh;
+  background: #fefefe;
+  font-family: 'Georgia', 'Times New Roman', serif;
+  color: #2c2c2c;
+  line-height: 1.7;
+}
+
+/* Navigation */
+.diary-navbar {
+  position: sticky;
+  top: 0;
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid #eaeaea;
+  z-index: 100;
+  padding: 1rem 0;
+}
+
+.navbar-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.back-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: none;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  color: #555;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.back-btn:hover {
+  border-color: #888;
+  background: #f8f8f8;
+}
+
+.back-icon {
+  stroke-width: 2;
+}
+
+.navbar-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logo-text {
+  font-size: 1.3rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: #222;
+}
+
+.logo-subtext {
+  font-size: 0.75rem;
+  color: #777;
+  margin-top: 2px;
+  letter-spacing: 1px;
+}
+
+.navbar-actions {
+  display: flex;
+  gap: 1rem;
+}
+
+.nav-action {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: none;
+  border: none;
+  color: #666;
+  font-size: 0.9rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  transition: color 0.3s ease;
+}
+
+.nav-action:hover {
+  color: #222;
+}
+
+/* Hero Section */
+.hero-section {
+  width: 100%;
+  margin-bottom: 4rem;
+}
+
+.hero-image-container {
+  position: relative;
+  height: 70vh;
+  min-height: 500px;
+  max-height: 800px;
+  overflow: hidden;
+}
+
+.hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.9);
+}
+
+.image-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.6));
+  display: flex;
+  align-items: flex-end;
+  padding: 3rem;
+}
+
+.hero-text {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 2rem;
+  color: white;
+}
+
+.hero-location {
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  opacity: 0.9;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.hero-title {
+  font-size: 3.5rem;
+  font-weight: 400;
+  margin: 0.5rem 0;
+  line-height: 1.1;
+  letter-spacing: -0.5px;
+}
+
+.hero-date {
+  font-size: 1rem;
+  opacity: 0.8;
+  margin-top: 1rem;
+  font-family: 'Arial', sans-serif;
+}
+
+/* Main Content */
+.diary-main-content {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 2rem 4rem;
+}
+
+.content-container {
+  background: white;
+}
+
+/* Introduction */
+.diary-intro {
+  margin-bottom: 3rem;
+}
+
+.section-title {
+  font-size: 2rem;
+  font-weight: 400;
+  color: #333;
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 0.5rem;
+}
+
+.lead-paragraph {
+  font-size: 1.2rem;
+  line-height: 1.8;
+  color: #444;
+  margin: 0;
+}
+
+/* Image Sections */
+.image-section {
+  margin: 3rem 0;
+}
+
+.image-section-title {
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: #444;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  font-family: 'Arial', sans-serif;
+}
+
+/* 2 Column Grid */
+.image-grid-2col {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  margin: 2rem 0;
+}
+
+.image-card {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.image-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+}
+
+.image-card img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  display: block;
+}
+
+.image-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 1rem;
+  margin: 0;
+  font-size: 0.9rem;
+  opacity: 0;
+  transform: translateY(100%);
+  transition: all 0.3s ease;
+}
+
+.image-card:hover .image-caption {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Full Width Image */
+.full-image-section {
+  margin: 4rem 0;
+}
+
+.full-image-card {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.1);
+}
+
+.full-image-card img {
+  width: 100%;
+  height: 500px;
+  object-fit: cover;
+}
+
+.full-image-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(transparent, rgba(0,0,0,0.8));
+  color: white;
+  padding: 2rem;
+  text-align: center;
+}
+
+.full-image-caption p {
+  margin: 0;
+  font-size: 1.1rem;
+  opacity: 0.9;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Story Sections */
+.story-section {
+  margin: 3rem 0;
+}
+
+.story-section p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  margin-bottom: 1.5rem;
+  color: #333;
+  text-align: justify;
+}
+
+/* Final Image */
+.final-image-card {
+  position: relative;
+  margin: 4rem 0;
+  border-radius: 12px;
+  overflow: hidden;
+  height: 400px;
+}
+
+.final-image-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.85);
+}
+
+.final-image-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.final-image-caption {
+  color: white;
+  font-size: 1.3rem;
+  font-style: italic;
+  text-align: center;
+  padding: 2rem;
+  max-width: 600px;
+  margin: 0;
+}
+
+/* Conclusion */
+.conclusion-section {
+  margin: 4rem 0;
+  padding: 2rem;
+  background: #fafafa;
+  border-radius: 12px;
+  border-left: 4px solid #d4b499;
+}
+
+.conclusion-title {
+  font-size: 1.8rem;
+  font-weight: 400;
+  color: #444;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.conclusion-content {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #444;
+}
+
+.conclusion-content p {
+  margin-bottom: 1.5rem;
+}
+
+.final-thought {
+  font-style: italic;
+  color: #666;
+  border-left: 3px solid #ccc;
+  padding-left: 1.5rem;
+  margin-top: 2rem;
+}
+
+/* Action Footer */
+.action-footer {
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 1px solid #eee;
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.action-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.primary-btn {
+  background: #2c3e50;
+  color: white;
+}
+
+.primary-btn:hover {
+  background: #1a252f;
+  transform: translateY(-2px);
+}
+
+.secondary-btn {
+  background: #f8f9fa;
+  color: #333;
+  border: 1px solid #ddd;
+}
+
+.secondary-btn:hover {
+  background: #e9ecef;
+  border-color: #ccc;
+  transform: translateY(-2px);
+}
+
+.share-btn {
+  background: #3498db;
+  color: white;
+}
+
+.share-btn:hover {
+  background: #2980b9;
+  transform: translateY(-2px);
+}
+
+/* Footer */
+.diary-footer {
+  background: #2c3e50;
+  color: white;
+  padding: 3rem 2rem;
+  margin-top: 4rem;
+}
+
+.footer-content {
+  max-width: 1000px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.footer-text {
+  font-size: 0.95rem;
+  color: #bdc3c7;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  font-size: 0.9rem;
+}
+
+.footer-links a {
+  color: #ecf0f1;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: white;
+  text-decoration: underline;
+}
+
+.footer-links span {
+  color: #7f8c8d;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 2.5rem;
+  }
+  
+  .image-grid-2col {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .hero-image-container {
+    height: 50vh;
+    min-height: 400px;
+  }
+  
+  .hero-text {
+    padding: 0 1rem;
+  }
+  
+  .navbar-content {
+    padding: 0 1rem;
+  }
+  
+  .diary-main-content {
+    padding: 0 1rem 3rem;
+  }
+  
+  .full-image-card img {
+    height: 400px;
+  }
+  
+  .action-buttons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .action-btn {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 2rem;
+  }
+  
+  .section-title {
+    font-size: 1.5rem;
+  }
+  
+  .hero-image-container {
+    height: 40vh;
+    min-height: 300px;
+  }
+  
+  .image-overlay {
+    padding: 2rem 1rem;
+  }
+}

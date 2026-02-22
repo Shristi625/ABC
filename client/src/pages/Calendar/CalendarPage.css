@@ -1,0 +1,109 @@
+.calendar-page {
+    min-height: 100vh;
+    background-color: var(--color-bg-soft);
+}
+
+.calendar-main {
+    padding-top: 40px;
+    padding-bottom: 60px;
+}
+
+.calendar-hero {
+    text-align: center;
+    margin-bottom: var(--space-8);
+}
+
+.calendar-hero h1 {
+    font-size: var(--text-4xl);
+    color: var(--color-text);
+    margin-bottom: var(--space-2);
+}
+
+.calendar-hero p {
+    color: var(--color-text-secondary);
+}
+
+.calendar-layout {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: var(--space-8);
+    align-items: start;
+}
+
+.calendar-section .calendar-widget {
+    max-width: 100%;
+    /* Expand to fill main area */
+    min-height: 500px;
+    /* Make it bigger */
+}
+
+/* Override calendar styles for the main page version to be bigger */
+.calendar-page .calendar-grid {
+    gap: 8px;
+    min-height: 400px;
+}
+
+.calendar-page .calendar-day {
+    height: 80px;
+    /* Bigger blocks */
+    font-size: var(--text-lg);
+    justify-content: flex-start;
+    padding-top: var(--space-2);
+}
+
+.calendar-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+}
+
+.calendar-info-card,
+.upcoming-summary {
+    background: var(--color-bg);
+    padding: var(--space-6);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--color-border);
+}
+
+.upcoming-summary h3,
+.calendar-info-card h3 {
+    font-size: var(--text-lg);
+    margin-bottom: var(--space-4);
+    color: var(--color-text);
+}
+
+.calendar-info-card ul {
+    padding-left: var(--space-4);
+    color: var(--color-text-secondary);
+}
+
+.calendar-info-card li {
+    margin-bottom: var(--space-2);
+}
+
+.mini-event-card {
+    background: var(--color-bg-soft);
+    padding: var(--space-3);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--space-3);
+    border-left: 3px solid var(--color-primary);
+}
+
+.mini-event-card strong {
+    display: block;
+    color: var(--color-primary);
+    font-size: var(--text-sm);
+}
+
+.mini-event-card p {
+    margin: 0;
+    font-size: var(--text-sm);
+    color: var(--color-text);
+}
+
+@media (max-width: 768px) {
+    .calendar-layout {
+        grid-template-columns: 1fr;
+    }
+}

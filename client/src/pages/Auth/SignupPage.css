@@ -1,0 +1,555 @@
+/* ===== GLOBAL RESET ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box !important;
+}
+
+:root {
+  --primary-blue: #3b82f6;
+  --primary-dark: #2563eb;
+  --secondary: #f59e0b;
+  --slate-50: #f8fafc;
+  --slate-100: #f1f5f9;
+  --slate-200: #e2e8f0;
+  --slate-300: #cbd5e1;
+  --slate-400: #94a3b8;
+  --slate-500: #64748b;
+  --slate-600: #475569;
+  --slate-700: #334155;
+  --slate-800: #1e293b;
+  --slate-900: #0f172a;
+
+  --error: #ef4444;
+  --success: #10b981;
+
+  --shadow-premium: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+  --shadow-input: 0 2px 4px rgba(0, 0, 0, 0.02);
+
+  --radius-xl: 24px;
+  --radius-lg: 16px;
+  --radius-md: 12px;
+
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --font-main: 'Inter', -apple-system, sans-serif;
+}
+
+/* ===== BASE LAYOUT ===== */
+.signup-page {
+  min-height: 100vh;
+  background: var(--slate-50);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  font-family: var(--font-main);
+  color: var(--slate-900);
+}
+
+.signup-container {
+  display: flex;
+  max-width: 1200px;
+  width: 100%;
+  min-height: 800px;
+  background: white;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-premium);
+  position: relative;
+}
+
+/* ===== LEFT IMAGE SECTION ===== */
+.image-section {
+  flex: 1.2;
+  position: relative;
+  background-image: url('https://s7ap1.scene7.com/is/image/incredibleindia/travel-specialist-bg?qlt=82&ts=1727161688083');
+  background-size: cover;
+  background-position: center;
+  padding: 4rem;
+  display: flex;
+  flex-direction: column;
+  color: white;
+}
+
+.image-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.85) 0%, rgba(15, 23, 42, 0.4) 100%);
+  z-index: 1;
+}
+
+.image-content {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 4rem;
+}
+
+.compass-icon {
+  width: 2.25rem;
+  height: 2.25rem;
+  color: var(--primary-blue);
+}
+
+.brand-name {
+  font-size: 1.4rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.image-title {
+  font-size: 3.25rem;
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.03em;
+}
+
+.image-description {
+  font-size: 1.15rem;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 2.5rem;
+  max-width: 400px;
+}
+
+.location-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  padding: 0.6rem 1.25rem;
+  border-radius: 99px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: auto;
+}
+
+.benefits {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 3rem;
+}
+
+.benefit {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 1rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.benefit-icon {
+  width: 1.4rem;
+  height: 1.4rem;
+  color: var(--primary-blue);
+  flex-shrink: 0;
+}
+
+/* ===== RIGHT FORM SECTION ===== */
+.form-section {
+  flex: 1.1;
+  padding: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  overflow-y: auto;
+}
+
+/* Custom scrollbar for form section */
+.form-section::-webkit-scrollbar {
+  width: 6px;
+}
+
+.form-section::-webkit-scrollbar-thumb {
+  background: var(--slate-200);
+  border-radius: 10px;
+}
+
+.form-container {
+  width: 100%;
+  max-width: 440px;
+}
+
+.form-header {
+  margin-bottom: 2.5rem;
+}
+
+.form-title {
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: var(--slate-900);
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.02em;
+}
+
+.form-subtitle {
+  color: var(--slate-500);
+  font-size: 1rem;
+}
+
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.form-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--slate-700);
+}
+
+.input-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.input-icon {
+  position: absolute;
+  left: 1.25rem !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  width: 1.5rem !important;
+  height: 1.5rem !important;
+  color: var(--slate-400);
+  pointer-events: none;
+  transition: var(--transition);
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  z-index: 20 !important;
+}
+
+.input-icon svg {
+  width: 1.25rem !important;
+  height: 1.25rem !important;
+}
+
+.form-input {
+  width: 100% !important;
+  padding: 1.25rem 1rem 1.25rem 4.5rem !important;
+  /* Extremely generous left padding */
+  border: 1px solid var(--slate-200) !important;
+  border-radius: var(--radius-md) !important;
+  font-size: 1rem !important;
+  transition: var(--transition) !important;
+  background: white !important;
+  display: block !important;
+  color: var(--slate-900) !important;
+}
+
+.form-input:focus {
+  outline: none;
+  background: white;
+  border-color: var(--primary-blue);
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+}
+
+.form-input:focus+.input-icon {
+  color: var(--primary-blue);
+}
+
+.form-input.error {
+  border-color: var(--error);
+  background: #fef2f2;
+}
+
+.error-message {
+  font-size: 0.8rem;
+  color: var(--error);
+  font-weight: 500;
+  margin-top: 0.25rem;
+}
+
+/* ===== PASSWORD REQUIREMENTS ===== */
+.password-requirements {
+  background: var(--slate-50);
+  padding: 1.25rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--slate-100);
+}
+
+.requirements-title {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--slate-500);
+  margin-bottom: 1rem;
+}
+
+.requirements-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+.requirements-list li {
+  font-size: 0.75rem;
+  color: var(--slate-500);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: var(--transition);
+}
+
+.requirements-list li::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--slate-300);
+  transition: var(--transition);
+}
+
+.requirements-list li.valid {
+  color: var(--success);
+  font-weight: 600;
+}
+
+.requirements-list li.valid::before {
+  background: var(--success);
+  box-shadow: 0 0 8px var(--success);
+}
+
+/* ===== CHECKBOXES ===== */
+.checkbox-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  cursor: pointer;
+  font-size: 0.875rem;
+  color: var(--slate-600);
+  line-height: 1.5;
+}
+
+.checkbox-custom {
+  width: 1.25rem;
+  height: 1.25rem;
+  border: 2px solid var(--slate-200);
+  border-radius: 6px;
+  flex-shrink: 0;
+  margin-top: 2px;
+  position: relative;
+  transition: var(--transition);
+  background: white;
+}
+
+.checkbox-label input {
+  position: absolute;
+  opacity: 0;
+}
+
+.checkbox-label input:checked+.checkbox-custom {
+  background: var(--primary-blue);
+  border-color: var(--primary-blue);
+}
+
+.checkbox-label input:checked+.checkbox-custom::after {
+  content: '✓';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 0.8rem;
+  font-weight: 900;
+}
+
+.link {
+  color: var(--primary-blue);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+/* ===== BUTTONS ===== */
+.signup-button {
+  width: 100%;
+  padding: 1rem;
+  background: var(--primary-blue);
+  color: white;
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.25);
+  margin-top: 1rem;
+}
+
+.signup-button:hover:not(:disabled) {
+  background: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(59, 130, 246, 0.35);
+}
+
+.signup-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.divider-line {
+  flex: 1;
+  height: 1px;
+  background: var(--slate-200);
+}
+
+.divider-text {
+  font-size: 0.8rem;
+  color: var(--slate-400);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.google-button {
+  width: 100%;
+  padding: 0.875rem;
+  background: white;
+  color: var(--slate-700);
+  border: 1px solid var(--slate-200);
+  border-radius: var(--radius-md);
+  font-size: 0.95rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.google-button:hover:not(:disabled) {
+  background: var(--slate-50);
+  border-color: var(--slate-300);
+}
+
+.google-icon {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
+.login-link {
+  text-align: center;
+  margin-top: 2rem;
+  font-size: 0.95rem;
+  color: var(--slate-500);
+}
+
+.login-text {
+  color: var(--primary-blue);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1024px) {
+  .signup-container {
+    max-width: 900px;
+    height: auto;
+  }
+
+  .image-section {
+    padding: 2.5rem;
+  }
+
+  .form-section {
+    padding: 3rem;
+  }
+
+  .image-title {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .signup-container {
+    flex-direction: column;
+    max-width: 500px;
+  }
+
+  .image-section {
+    min-height: 350px;
+  }
+
+  .form-section {
+    padding: 2.5rem;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .signup-page {
+    padding: 0.5rem;
+  }
+
+  .signup-container {
+    border-radius: 0;
+  }
+
+  .form-section {
+    padding: 2rem 1.5rem;
+  }
+
+  .image-section {
+    padding: 2rem 1.5rem;
+  }
+
+  .image-title {
+    font-size: 2.25rem;
+  }
+
+  .requirements-list {
+    grid-template-columns: 1fr;
+  }
+}

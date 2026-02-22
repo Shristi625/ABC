@@ -1,0 +1,306 @@
+/* GroupTripPage.css */
+
+:root {
+    --primary-color: #ff6b6b;
+    --secondary-color: #4ecdc4;
+    --accent-color: #ffe66d;
+    --dark-bg: #1a1a2e;
+    --card-bg: rgba(255, 255, 255, 0.1);
+    --glass-border: rgba(255, 255, 255, 0.2);
+    --text-light: #f7f7f7;
+    --text-muted: #a0a0a0;
+    --gradient-main: linear-gradient(135deg, #ff6b6b, #556270);
+}
+
+.group-trip-container {
+    min-height: 100vh;
+    background: var(--dark-bg);
+    background-image: radial-gradient(circle at 10% 20%, rgba(78, 205, 196, 0.1) 0%, transparent 20%),
+        radial-gradient(circle at 90% 80%, rgba(255, 107, 107, 0.1) 0%, transparent 20%);
+    color: var(--text-light);
+    font-family: 'Inter', sans-serif;
+    padding: 2rem;
+    overflow-x: hidden;
+}
+
+/* Header Section */
+.trip-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    animation: fadeInDown 0.8s ease-out;
+}
+
+.trip-header h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    background: linear-gradient(to right, #4ecdc4, #ff6b6b);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 0.5rem;
+}
+
+.trip-header p {
+    color: var(--text-muted);
+    font-size: 1.2rem;
+}
+
+/* Layout Grid */
+.trip-dashboard {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+@media (max-width: 1024px) {
+    .trip-dashboard {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Glassmorphism Cards */
+.glass-card {
+    background: var(--card-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.glass-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.5);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+/* Sidebar Styling */
+.trip-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.trip-info h2,
+.budget-section h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    color: var(--secondary-color);
+    border-bottom: 2px solid rgba(78, 205, 196, 0.3);
+    padding-bottom: 0.5rem;
+}
+
+.info-item {
+    margin-bottom: 1rem;
+}
+
+.info-item label {
+    display: block;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: 0.3rem;
+}
+
+.info-item input {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--glass-border);
+    padding: 0.8rem;
+    border-radius: 10px;
+    color: white;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.info-item input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Members Avatar Group */
+.members-list {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.member-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--gradient-main);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    border: 2px solid var(--dark-bg);
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.member-avatar:hover {
+    transform: scale(1.1);
+    z-index: 10;
+}
+
+.add-member {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-light);
+    font-size: 1.2rem;
+}
+
+/* Main Content: Budget & Itinerary */
+.budget-tracker {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.budget-categories {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.category-card {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+    padding: 1.5rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.category-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+}
+
+.cat-transport::before {
+    background: #4ecdc4;
+}
+
+.cat-accommodation::before {
+    background: #ff6b6b;
+}
+
+.cat-activities::before {
+    background: #ffe66d;
+}
+
+.category-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.category-header h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.add-cost-btn {
+    background: none;
+    border: none;
+    color: var(--secondary-color);
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.add-cost-btn:hover {
+    color: white;
+}
+
+.cost-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 0.9rem;
+}
+
+.cost-item:last-child {
+    border-bottom: none;
+}
+
+.cost-summary {
+    margin-top: 2rem;
+    text-align: right;
+    padding-top: 1rem;
+    border-top: 1px solid var(--glass-border);
+}
+
+.total-cost {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--primary-color);
+}
+
+.per-person {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+/* Transportation Specifics */
+.transport-details {
+    margin-top: 1rem;
+}
+
+.transport-input-group {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.transport-input-group input {
+    background: rgba(255, 255, 255, 0.05);
+    border: none;
+    padding: 0.5rem;
+    border-radius: 5px;
+    color: white;
+    width: 100%;
+}
+
+.transport-input-group input:focus {
+    outline: 1px solid var(--primary-color);
+}
+
+button.save-btn {
+    width: 100%;
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    background: var(--secondary-color);
+    color: var(--dark-bg);
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+button.save-btn:hover {
+    background: white;
+}
+
+/* Animations */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

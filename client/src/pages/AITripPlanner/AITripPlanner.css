@@ -1,0 +1,260 @@
+/* AI Trip Planner - Futuristic UI */
+
+.ai-planner-page {
+    background: var(--bg-secondary);
+    min-height: 100vh;
+}
+
+.ai-container {
+    max-width: 800px;
+    margin: 60px auto;
+    padding: 0 20px;
+}
+
+.ai-planner-card {
+    background: white;
+    border-radius: 24px;
+    padding: 40px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+    min-height: 500px;
+    display: flex;
+    flex-direction: column;
+}
+
+.planner-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.planner-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 8px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Form Styles */
+.form-group {
+    margin-bottom: 32px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: var(--text-main);
+}
+
+.form-group input[type="text"] {
+    width: 100%;
+    padding: 16px;
+    border: 2px solid #eee;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    transition: border 0.2s;
+}
+
+.form-group input[type="text"]:focus {
+    border-color: #764ba2;
+    outline: none;
+}
+
+/* Slider */
+.slider-container {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+input[type="range"] {
+    flex: 1;
+    height: 6px;
+    border-radius: 5px;
+    background: #eee;
+    outline: none;
+    -webkit-appearance: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 24px;
+    height: 24px;
+    background: #764ba2;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(118, 75, 162, 0.4);
+}
+
+.slider-value {
+    font-weight: 700;
+    color: #764ba2;
+    min-width: 60px;
+}
+
+/* Style Pills */
+.style-pills {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.pill {
+    padding: 10px 24px;
+    border-radius: 50px;
+    border: 1px solid #eee;
+    background: white;
+    color: var(--text-secondary);
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s;
+}
+
+.pill.active {
+    background: #764ba2;
+    color: white;
+    border-color: #764ba2;
+    transform: scale(1.05);
+    box-shadow: 0 8px 15px rgba(118, 75, 162, 0.3);
+}
+
+.btn-generate {
+    width: 100%;
+    padding: 18px;
+    background: black;
+    color: white;
+    border: none;
+    border-radius: 16px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: transform 0.2s;
+}
+
+.btn-generate:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Loader */
+.ai-loading {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 300px;
+}
+
+.loader-orbit {
+    width: 60px;
+    height: 60px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #764ba2;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 24px;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Results */
+.itinerary-result {
+    margin-top: 20px;
+}
+
+.result-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 20px;
+}
+
+.result-header h2 {
+    font-size: 1.5rem;
+    margin: 0;
+}
+
+.cost-badge {
+    background: #e6fffa;
+    color: #2c7a7b;
+    padding: 8px 16px;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+.timeline {
+    position: relative;
+    padding-left: 20px;
+    border-left: 2px solid #eee;
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 32px;
+    padding-left: 24px;
+}
+
+.day-marker {
+    position: absolute;
+    left: -34px;
+    background: #764ba2;
+    color: white;
+    width: 60px;
+    height: 28px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.day-content h4 {
+    margin: 0 0 4px 0;
+}
+
+.day-content p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    margin: 0;
+}
+
+.result-actions {
+    display: flex;
+    gap: 16px;
+    margin-top: 40px;
+}
+
+.btn-save,
+.btn-book {
+    flex: 1;
+    padding: 14px;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+}
+
+.btn-save {
+    background: #f7f7f7;
+    color: #222;
+}
+
+.btn-book {
+    background: #FF385C;
+    color: white;
+}

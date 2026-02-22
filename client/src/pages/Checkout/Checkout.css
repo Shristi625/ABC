@@ -1,0 +1,26 @@
+.checkout-body { padding: 40px 0; }
+.checkout-card { max-width: 720px; margin: 0 auto; padding: 32px; border: 1px solid #eee; border-radius: 8px; background: #fff; }
+.checkout-image { width: 100%; height: 320px; object-fit: cover; border-radius: 6px; margin-bottom: 24px; }
+.checkout-title { font-size: 28px; margin: 0 0 24px 0; text-align: center; }
+
+.checkout-section { text-align: left; margin-bottom: 28px; padding-bottom: 24px; border-bottom: 1px solid #f0f0f0; }
+.checkout-section h3 { font-size: 16px; margin: 0 0 12px 0; color: #333; font-weight: 600; }
+.checkout-section:last-of-type { border-bottom: none; }
+
+.checkout-options { display: flex; flex-direction: column; gap: 10px; }
+.option-label { display: flex; align-items: center; padding: 12px; border: 1px solid #e0e0e0; border-radius: 6px; cursor: pointer; transition: all 0.2s; }
+.option-label:hover { background: #f9f9f9; border-color: #1976d2; }
+.option-label input[type="radio"] { margin-right: 12px; cursor: pointer; }
+.option-label input[type="radio"]:checked + .option-text { font-weight: 600; color: #1976d2; }
+.option-text { flex: 1; text-align: left; }
+.option-price { font-weight: 600; color: #1976d2; min-width: 80px; text-align: right; }
+
+.checkout-totals { background: #f5f5f5; padding: 20px; border-radius: 6px; border: none; }
+.checkout-line-item { display: flex; justify-content: space-between; font-size: 14px; margin-bottom: 10px; }
+.checkout-line-item span:first-child { color: #666; }
+.checkout-total { font-size: 16px; font-weight: 600; padding-top: 10px; border-top: 2px solid #ddd; }
+
+.checkout-proceed { background: #1976d2; color: #fff; padding: 12px 24px; border: none; border-radius: 6px; cursor: pointer; font-size: 16px; margin-top: 20px; margin-right: 8px; width: 100%; }
+.checkout-proceed:hover { background: #1565c0; }
+.checkout-back { background: #eee; color: #333; padding: 12px 24px; border: none; border-radius: 6px; cursor: pointer; font-size: 16px; width: 100%; margin-top: 8px; }
+.checkout-back:hover { background: #ddd; }
