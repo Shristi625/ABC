@@ -93,7 +93,9 @@ const SignupPage = () => {
 
       // If there are detailed validation errors, display them
       if (apiError?.error && Array.isArray(apiError.error)) {
-        const details = apiError.error.map(err => `${err.path || err.param}: ${err.msg}`).join('\n');
+        const details = apiError.error
+          .map((err) => `${err.path || err.param}: ${err.msg}`)
+          .join("\n");
         errorMessage += `\n\nDetails:\n${details}`;
       }
 
@@ -115,31 +117,35 @@ const SignupPage = () => {
           <div className="image-overlay"></div>
           <div className="image-content">
             <Link to="/" className="app-brand">
-              <div className="compass-icon">
-                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor">
-                  <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" strokeWidth="2" />
-                  <path d="M16.24 7.76L14.12 14.12L7.76 16.24L9.88 9.88L16.24 7.76Z" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                  <circle cx="12" cy="12" r="1" fill="currentColor" />
-                </svg>
+              <div className="logo-img">
+                <img src="/logo/travel-remove.png" alt="Travel Logo" />
               </div>
-              <span className="brand-name">Travel Diaries Nepal</span>
+              <span className="brand-name">Travel Diaries</span>
             </Link>
 
             <div className="image-text">
               <h1 className="image-title">Where Earth Touches the Sky</h1>
               <p className="image-description">
-                Every mountain peak holds a secret, and every valley tells a story. Join our global circle of explorers and weave your own narrative into the timeless tapestry of Nepal.
+                Every mountain peak holds a secret, and every valley tells a
+                story. Join our global circle of explorers and weave your own
+                narrative into the timeless tapestry of Nepal.
               </p>
-              <div className="location-tag">
-                <span className="location-icon">🏔️</span>
-                <span className="location-text">Eternal Himalayas, Nepal</span>
-              </div>
             </div>
-
+            <div className="location-tag">
+              <span className="location-icon">🏔️</span>
+              <span className="location-text">Eternal Himalayas, Nepal</span>
+            </div>
             <div className="benefits">
               <div className="benefit">
                 <div className="benefit-icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
                     <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
                     <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
                   </svg>
@@ -148,7 +154,14 @@ const SignupPage = () => {
               </div>
               <div className="benefit">
                 <div className="benefit-icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
                     <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
                     <circle cx="12" cy="10" r="3" />
                   </svg>
@@ -157,7 +170,14 @@ const SignupPage = () => {
               </div>
               <div className="benefit">
                 <div className="benefit-icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
                     <path d="M17 21V19a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
                     <circle cx="9" cy="7" r="4" />
                     <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
@@ -343,8 +363,9 @@ const SignupPage = () => {
                       type="password"
                       id="confirmPassword"
                       name="confirmPassword"
-                      className={`form-input ${errors.confirmPassword ? "error" : ""
-                        }`}
+                      className={`form-input ${
+                        errors.confirmPassword ? "error" : ""
+                      }`}
                       placeholder="Confirm password"
                       value={formData.confirmPassword}
                       onChange={handleChange}
@@ -383,46 +404,40 @@ const SignupPage = () => {
 
               <div className="form-group">
                 <div className="checkbox-group">
-                  <label className="checkbox-label">
-                    <input
-                      type="checkbox"
-                      name="acceptTerms"
-                      checked={formData.acceptTerms}
-                      onChange={handleChange}
-                      disabled={isLoading}
-                    />
-                    <span className="checkbox-custom"></span>
-                    <span className="checkbox-text">
-                      I agree to the{" "}
-                      <a href="#" className="link">
-                        Terms of Service
-                      </a>{" "}
-                      and{" "}
-                      <a href="#" className="link">
-                        Privacy Policy
-                      </a>
-                    </span>
-                  </label>
+                  <input
+                    type="checkbox"
+                    name="acceptTerms"
+                    checked={formData.acceptTerms}
+                    onChange={handleChange}
+                    disabled={isLoading}
+                  />
+                  <span className="checkbox-text">
+                    I agree to the{" "}
+                    <a href="#" className="link">
+                      Terms of Service
+                    </a>{" "}
+                    and{" "}
+                    <a href="#" className="link">
+                      Privacy Policy
+                    </a>
+                  </span>
                   {errors.acceptTerms && (
                     <div className="error-message">{errors.acceptTerms}</div>
                   )}
                 </div>
 
                 <div className="checkbox-group">
-                  <label className="checkbox-label">
-                    <input
-                      type="checkbox"
-                      name="newsletter"
-                      checked={formData.newsletter}
-                      onChange={handleChange}
-                      disabled={isLoading}
-                    />
-                    <span className="checkbox-custom"></span>
-                    <span className="checkbox-text">
-                      Send me travel tips, destination updates, and community
-                      stories
-                    </span>
-                  </label>
+                  <input
+                    type="checkbox"
+                    name="newsletter"
+                    checked={formData.newsletter}
+                    onChange={handleChange}
+                    disabled={isLoading}
+                  />
+                  <span className="checkbox-text">
+                    Send me travel tips, destination updates, and community
+                    stories
+                  </span>
                 </div>
               </div>
 

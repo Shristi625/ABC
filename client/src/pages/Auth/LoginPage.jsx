@@ -52,7 +52,7 @@ const LoginPage = () => {
           id: response.data.data.userId,
           fullName: response.data.data.fullName,
           email: response.data.data.email,
-        })
+        }),
       );
 
       navigate("/dashboard");
@@ -62,10 +62,13 @@ const LoginPage = () => {
       setRememberMe(false);
     } catch (error) {
       const apiError = error.response?.data;
-      let errorMessage = apiError?.message || "Login failed. Please check your credentials.";
+      let errorMessage =
+        apiError?.message || "Login failed. Please check your credentials.";
 
       if (apiError?.error && Array.isArray(apiError.error)) {
-        const details = apiError.error.map(err => `${err.path || err.param}: ${err.msg}`).join('\n');
+        const details = apiError.error
+          .map((err) => `${err.path || err.param}: ${err.msg}`)
+          .join("\n");
         errorMessage += `\n\nDetails:\n${details}`;
       }
 
@@ -83,7 +86,7 @@ const LoginPage = () => {
     e.preventDefault();
     showToast(
       "Password reset instructions will be sent to your email.",
-      "info"
+      "info",
     );
   };
 
@@ -95,23 +98,22 @@ const LoginPage = () => {
           <div className="image-overlay"></div>
           <div className="image-content">
             <Link to="/" className="app-brand">
-              <div className="compass-icon">
-                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor">
-                  <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" strokeWidth="2" />
-                  <path d="M16.24 7.76L14.12 14.12L7.76 16.24L9.88 9.88L16.24 7.76Z" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                  <circle cx="12" cy="12" r="1" fill="currentColor" />
-                </svg>
+              <div className="logo-img">
+                <img src="/logo/travel-remove.png" alt="Travel Logo" />
               </div>
-              <span className="brand-name">Travel Diaries Nepal</span>
+              <span className="brand-name">Travel Diaries</span>
             </Link>
             <div className="image-text">
               <h1 className="image-title">Discover Nepal's Hidden Treasures</h1>
               <p className="image-description">
-                From the high Himalayas to ancient sacred temples, capture and relive every magical moment of your journey.
+                From the high Himalayas to ancient sacred temples, capture and
+                relive every magical moment of your journey.
               </p>
               <div className="location-tag">
                 <span className="location-icon">📍</span>
-                <span className="location-text">Annapurna Base Camp, Nepal</span>
+                <span className="location-text">
+                  Annapurna Base Camp, Nepal
+                </span>
               </div>
             </div>
             <div className="image-stats">
