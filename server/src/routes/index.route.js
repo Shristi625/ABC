@@ -1,11 +1,13 @@
 import { Router } from "express";
 import { successResponse } from "../utils/index.util.js";
 import mongoose from "mongoose";
+
 import authRoute from "./auth.route.js";
 import travelDiaryRoute from "./travel-diary.route.js";
 import userRoute from "./user.route.js";
 import foodRoute from "./food.route.js";
 import chatRoute from "./chat.route.js";
+import communityStoryRoute from "./community-story.route.js";
 
 const router = Router();
 
@@ -41,6 +43,7 @@ router.use("/api/v1/travel-diaries", travelDiaryRoute);
 router.use("/api/v1/users", userRoute);
 router.use("/api/v1/foods", foodRoute);
 router.use("/api/v1/chat", chatRoute);
+router.use("/api/v1/community-stories", communityStoryRoute);
 
 router.use((req, res, next) => {
   res.status(404).json({

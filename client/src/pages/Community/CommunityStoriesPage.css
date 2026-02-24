@@ -1,0 +1,79 @@
+.community-stories-page {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  max-width: 1100px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.08);
+}
+
+.stories-main {
+  flex: 2;
+}
+
+.stories-sidebar {
+  flex: 1;
+  background: #f7f8fa;
+  border-radius: 8px;
+  padding: 1.5rem 1rem;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+  min-width: 220px;
+  max-width: 300px;
+  height: fit-content;
+}
+
+.stories-sidebar h4 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+  color: #444;
+}
+.stories-sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.stories-sidebar li {
+  margin-bottom: 0.7rem;
+  font-size: 0.98rem;
+  color: #333;
+  display: flex;
+  align-items: center;
+}
+.stories-sidebar li span {
+  margin-right: 0.5em;
+}
+
+.post-story-btn {
+  background: linear-gradient(90deg, #4f8cff 0%, #6ed6ff 100%);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.6em 1.4em;
+  font-size: 1.1em;
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.post-story-btn:hover {
+  background: linear-gradient(90deg, #357ae8 0%, #4fc3f7 100%);
+}
+
+.stories-list {
+  margin-top: 2rem;
+}
+
+.error {
+  color: #c00;
+  margin-bottom: 1rem;
+  background: #ffeaea;
+  padding: 0.7em 1em;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

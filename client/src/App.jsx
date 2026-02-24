@@ -21,6 +21,7 @@ import Chatbot from "./pages/Chatbot/Chatbot";
 import ExplorePage from "./pages/Explore/ExplorePage";
 import LandingPage from "./pages/Landing/LandingPage";
 import CommunityPage from "./pages/Community/CommunityPage";
+import CommunityStoriesPage from "./pages/Community/CommunityStoriesPage";
 import Checkout from "./pages/Checkout/Checkout";
 
 // Protected Route Component
@@ -56,7 +57,11 @@ function App() {
         localStorage.setItem("user", userData); // userData is already JSON stringified from server
 
         // Clean up the URL so the token isn't visible in the address bar
-        window.history.replaceState({}, document.title, window.location.pathname);
+        window.history.replaceState(
+          {},
+          document.title,
+          window.location.pathname,
+        );
 
         // Refresh to make sure all components see the logged in state
         window.location.reload();
@@ -65,7 +70,6 @@ function App() {
       }
     }
   }, []);
-
 
   return (
     <Router>
@@ -157,6 +161,7 @@ function App() {
           }
         />
         <Route path="/community" element={<CommunityPage />} />
+        <Route path="/community/stories" element={<CommunityStoriesPage />} />
         <Route
           path="/explore"
           element={

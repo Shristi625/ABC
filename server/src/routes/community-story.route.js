@@ -1,0 +1,45 @@
+import express from "express";
+import {
+  createStory,
+  getStories,
+  getStoryById,
+  updateStory,
+  deleteStory,
+} from "../controllers/community-story.controller.js";
+import authenticate from "../middlewares/authenticate.middleware.js";
+import {
+  createStoryValidator,
+  updateStoryValidator,
+} from "../validators/community-story.validator.js";
+import validateRequest from "../middlewares/validate-request.middleware.js";
+
+const router = express.Router();
+
+// Create a story (auth required)
+router.post(
+  "/",
+  authenticate,
+  createStoryValidator,
+  validateRequest,
+  createStory,
+);
+
+// Get all stories
+router.get("/", getStories);
+
+// Get a single story by ID
+router.get("/:id", getStoryById);
+
+// Update a story (auth required)
+router.put(
+  "/:id",
+  authenticate,
+  updateStoryValidator,
+  validateRequest,
+  updateStory,
+);
+
+// Delete a story (auth required)
+router.delete("/:id", authenticate, deleteStory);
+
+export default router;
