@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
-import './Header.css';
-import { logout } from '../../services/auth'; // Import logout service
+import React, { useState, useEffect, useRef } from "react";
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import "./Header.css";
+import { logout } from "../../services/auth"; // Import logout service
 
-const Header = ({ variant = 'default' }) => {
+const Header = ({ variant = "default" }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -28,11 +28,11 @@ const Header = ({ variant = 'default' }) => {
     };
 
     if (destinationsOpen || profileOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
+      document.addEventListener("mousedown", handleClickOutside);
     }
 
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [destinationsOpen, profileOpen]);
 
@@ -42,13 +42,13 @@ const Header = ({ variant = 'default' }) => {
   }, [location.pathname]);
 
   const handlePlanTrip = () => {
-    navigate('/plan');
+    navigate("/plan");
     closeMenu();
   };
 
   const handleAITravelPlanner = () => {
     setTimeout(() => {
-      const chatbotToggle = document.querySelector('.chatbot__toggle');
+      const chatbotToggle = document.querySelector(".chatbot__toggle");
       if (chatbotToggle) {
         chatbotToggle.click();
       }
@@ -73,28 +73,28 @@ const Header = ({ variant = 'default' }) => {
 
   const destinationCategories = {
     hills: [
-      { name: 'Nagarkot', path: '/destination/nagarkot' },
-      { name: 'Dhulikhel', path: '/destination/dhulikhel' },
-      { name: 'Bandipur', path: '/destination/bandipur' },
-      { name: 'Daman', path: '/destination/daman' },
+      { name: "Nagarkot", path: "/destination/nagarkot" },
+      { name: "Dhulikhel", path: "/destination/dhulikhel" },
+      { name: "Bandipur", path: "/destination/bandipur" },
+      { name: "Daman", path: "/destination/daman" },
     ],
     mountains: [
-      { name: 'Annapurna Base Camp', path: '/destination/annapurna-base-camp' },
-      { name: 'Poon Hill', path: '/destination/poonhill' },
-      { name: 'Kalinchowk', path: '/destination/kalinchowk' },
-      { name: 'Langtang', path: '/destination/langtang' },
+      { name: "Annapurna Base Camp", path: "/destination/annapurna-base-camp" },
+      { name: "Poon Hill", path: "/destination/poonhill" },
+      { name: "Kalinchowk", path: "/destination/kalinchowk" },
+      { name: "Langtang", path: "/destination/langtang" },
     ],
-    'cultural-towns': [
-      { name: 'Kathmandu', path: '/destination/kathmandu' },
-      { name: 'Patan', path: '/destination/patan' },
-      { name: 'Bandipur', path: '/destination/bandipur' },
-      { name: 'Tansen', path: '/destination/tansen' },
+    "cultural-towns": [
+      { name: "Kathmandu", path: "/destination/kathmandu" },
+      { name: "Patan", path: "/destination/patan" },
+      { name: "Bandipur", path: "/destination/bandipur" },
+      { name: "Tansen", path: "/destination/tansen" },
     ],
-    'hidden-gems': [
-      { name: 'Ilam', path: '/destination/ilam' },
-      { name: 'Sailung', path: '/destination/sailung' },
-      { name: 'Jaljala', path: '/destination/jaljala' },
-      { name: 'Bhedetar', path: '/destination/bhedetar' },
+    "hidden-gems": [
+      { name: "Ilam", path: "/destination/ilam" },
+      { name: "Sailung", path: "/destination/sailung" },
+      { name: "Jaljala", path: "/destination/jaljala" },
+      { name: "Bhedetar", path: "/destination/bhedetar" },
     ],
   };
 
@@ -102,8 +102,10 @@ const Header = ({ variant = 'default' }) => {
     <header className={`header header--${variant}`}>
       <div className="container header__inner">
         <Link to="/" className="header__logo" onClick={closeMenu}>
-          <span className="header__logo-icon">✈</span>
-          <span className="header__logo-text">Travel Diaries Nepal</span>
+          <div className="img">
+            <img src="/logo/travel-logo-remove.png" alt="Logo" />
+          </div>
+          <span className="header__logo-text">Travel Diaries</span>
         </Link>
 
         <button
@@ -111,12 +113,12 @@ const Header = ({ variant = 'default' }) => {
           onClick={toggleMenu}
           aria-label="Toggle menu"
         >
-          <span className={isMenuOpen ? 'open' : ''}></span>
-          <span className={isMenuOpen ? 'open' : ''}></span>
-          <span className={isMenuOpen ? 'open' : ''}></span>
+          <span className={isMenuOpen ? "open" : ""}></span>
+          <span className={isMenuOpen ? "open" : ""}></span>
+          <span className={isMenuOpen ? "open" : ""}></span>
         </button>
 
-        <nav className={`header__nav ${isMenuOpen ? 'header__nav--open' : ''}`}>
+        <nav className={`header__nav ${isMenuOpen ? "header__nav--open" : ""}`}>
           <Link to="/" className="header__link" onClick={closeMenu}>
             Home
           </Link>
@@ -165,7 +167,7 @@ const Header = ({ variant = 'default' }) => {
                 </div>
                 <div className="header__dropdown-section">
                   <h4 className="header__dropdown-title">Cultural Towns</h4>
-                  {destinationCategories['cultural-towns'].map((dest) => (
+                  {destinationCategories["cultural-towns"].map((dest) => (
                     <Link
                       key={dest.path}
                       to={dest.path}
@@ -178,7 +180,7 @@ const Header = ({ variant = 'default' }) => {
                 </div>
                 <div className="header__dropdown-section">
                   <h4 className="header__dropdown-title">Hidden Gems</h4>
-                  {destinationCategories['hidden-gems'].map((dest) => (
+                  {destinationCategories["hidden-gems"].map((dest) => (
                     <Link
                       key={dest.path}
                       to={dest.path}
@@ -220,10 +222,7 @@ const Header = ({ variant = 'default' }) => {
             Community
           </Link>
 
-          <button
-            className="header__cta"
-            onClick={handlePlanTrip}
-          >
+          <button className="header__cta" onClick={handlePlanTrip}>
             <span>✨</span> Plan My Trip
           </button>
 
@@ -232,7 +231,8 @@ const Header = ({ variant = 'default' }) => {
             className="header__profile"
             ref={profileRef}
             onMouseEnter={() => {
-              if (profileTimeoutRef.current) clearTimeout(profileTimeoutRef.current);
+              if (profileTimeoutRef.current)
+                clearTimeout(profileTimeoutRef.current);
               setProfileOpen(true);
             }}
             onMouseLeave={() => {
@@ -245,23 +245,37 @@ const Header = ({ variant = 'default' }) => {
               className="header__profile-btn"
               onClick={() => setProfileOpen(!profileOpen)}
             >
-              <span role="img" aria-label="user">👤</span>
+              <span role="img" aria-label="user">
+                👤
+              </span>
             </button>
 
             {profileOpen && (
               <div
                 className="header__profile-menu"
                 onMouseEnter={() => {
-                  if (profileTimeoutRef.current) clearTimeout(profileTimeoutRef.current);
+                  if (profileTimeoutRef.current)
+                    clearTimeout(profileTimeoutRef.current);
                 }}
               >
-                <Link to="/profile" className="header__profile-link" onClick={closeMenu}>
+                <Link
+                  to="/profile"
+                  className="header__profile-link"
+                  onClick={closeMenu}
+                >
                   My Profile
                 </Link>
-                <Link to="/settings" className="header__profile-link" onClick={closeMenu}>
+                <Link
+                  to="/settings"
+                  className="header__profile-link"
+                  onClick={closeMenu}
+                >
                   Settings
                 </Link>
-                <button className="header__profile-logout" onClick={handleLogout}>
+                <button
+                  className="header__profile-logout"
+                  onClick={handleLogout}
+                >
                   Log Out
                 </button>
               </div>

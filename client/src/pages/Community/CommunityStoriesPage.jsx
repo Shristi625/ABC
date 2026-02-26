@@ -138,7 +138,7 @@ const CommunityStoriesPage = () => {
         )}
         {showForm ? (
           <StoryForm
-            initialData={editingStory}
+            initialData={editingStory || {}}
             onSubmit={editingStory ? handleUpdate : handleCreate}
             onCancel={() => {
               setShowForm(false);

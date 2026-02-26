@@ -12,8 +12,10 @@ export const fetchStoryById = async (id) => {
   return res.data;
 };
 
-export const createStory = async (story) => {
-  const res = await axios.post(API_URL, story);
+export const createStory = async (storyFormData) => {
+  const res = await axios.post(API_URL, storyFormData, {
+    headers: { "Content-Type": "multipart/form-data" },
+  });
   return res.data;
 };
 

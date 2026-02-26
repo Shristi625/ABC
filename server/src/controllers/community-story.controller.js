@@ -1,5 +1,6 @@
 import asyncHandler from "../middlewares/async-handler.middleware.js";
 import CommunityStory from "../models/community-story.model.js";
+import { uploadToCloudinary } from "../utils/index.util.js";
 
 // Like a community story
 export const likeStory = asyncHandler(async (req, res) => {
@@ -25,9 +26,18 @@ export const viewStory = asyncHandler(async (req, res) => {
 
 // Create a new community story
 export const createStory = asyncHandler(async (req, res) => {
-  const { content, image } = req.body;
+  const { content } = req.body;
   const author = req.user._id;
-  const story = await CommunityStory.create({ content, image, author });
+  let imageUrl = undefined;
+  if (req.file) {
+    const uploadResult = await uploadToCloudinary(req.file.buffer, "community-stories");
+    imageUrl = uploadResult.url;
+  }
+  const story = await CommunityStory.create({
+    content,
+    image: imageUrl,
+    author,
+  });
   res.status(201).json(story);
 });
 

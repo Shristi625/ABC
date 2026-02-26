@@ -9,6 +9,7 @@ import {
   likeStory,
   viewStory,
 } from "../controllers/community-story.controller.js";
+import { uploadSingle } from "../middlewares/multer.middleware.js";
 import authenticate from "../middlewares/authenticate.middleware.js";
 import {
   createStoryValidator,
@@ -26,6 +27,7 @@ router.post("/:id/view", viewStory);
 router.post(
   "/",
   authenticate,
+  uploadSingle("image"),
   createStoryValidator,
   validateRequest,
   createStory,

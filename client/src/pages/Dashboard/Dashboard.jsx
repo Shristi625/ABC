@@ -46,19 +46,45 @@ const Dashboard = () => {
       <nav className="dashboard-nav">
         <div className="nav-container">
           <Link to="/" className="nav-logo">
-            <span className="logo-icon">🏔️</span>
-            <span className="logo-text">Travel Diaries Nepal</span>
+            <div className="img">
+              <img
+                src="/logo/travel-logo-remove.png"
+                alt="Travel Diaries Logo"
+              />
+            </div>
+            <span className="logo-text">Travel Diaries</span>
           </Link>
 
           <div className="nav-links">
-            <Link to="/home" className="nav-link">Home</Link>
-            <Link to="/dashboard" className="nav-link active">Dashboard</Link>
-            <Link to="/explore" className="nav-link">Explore</Link>
-            <button className="nav-cta" onClick={handleNewEntry}>Write Now</button>
+            <Link to="/home" className="nav-link">
+              Home
+            </Link>
+            <Link to="/dashboard" className="nav-link active">
+              Dashboard
+            </Link>
+            <Link to="/explore" className="nav-link">
+              Explore
+            </Link>
+            <Link to="/community/stories" className="nav-link">
+              Community Stories
+            </Link>
+            <button className="nav-cta" onClick={handleNewEntry}>
+              Write Now
+            </button>
             <div className="profile-dropdown">
               <button className="profile-trigger">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" />
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                  <circle cx="12" cy="7" r="4" />
                 </svg>
               </button>
               <div className="dropdown-menu">
@@ -82,7 +108,9 @@ const Dashboard = () => {
       <main className="dashboard-main">
         {/* Welcome Section */}
         <section className="welcome-section">
-          <h1 className="welcome-title">Welcome back, {user.fullName?.split(' ')[0] || 'Explorer'} 👋</h1>
+          <h1 className="welcome-title">
+            Welcome back, {user.fullName?.split(" ")[0] || "Explorer"} 👋
+          </h1>
           <p className="welcome-subtitle">
             Your Himalayan journey continues here. Capture a new memory today.
           </p>
@@ -94,7 +122,9 @@ const Dashboard = () => {
           <button className="write-button" onClick={handleNewEntry}>
             Start Writing Diary
           </button>
-          <div className="cta-hint">Continue your journey where you left off.</div>
+          <div className="cta-hint">
+            Continue your journey where you left off.
+          </div>
         </section>
 
         {/* Entries Section */}
@@ -109,7 +139,7 @@ const Dashboard = () => {
           <div className="entries-grid">
             {isLoading ? (
               // Skeleton Loaders
-              [1, 2, 3].map(i => (
+              [1, 2, 3].map((i) => (
                 <div key={i} className="entry-card skeleton-card">
                   <div className="entry-cover skeleton"></div>
                   <div className="entry-content">
@@ -123,7 +153,9 @@ const Dashboard = () => {
             ) : recentEntries.length > 0 ? (
               recentEntries.map((entry) => {
                 const entryId = entry._id || entry.id;
-                const displayId = entryId ? entryId.toString().slice(-4).toUpperCase() : "xxxx";
+                const displayId = entryId
+                  ? entryId.toString().slice(-4).toUpperCase()
+                  : "xxxx";
                 const displayDate = entry.createdAt || entry.date || new Date();
 
                 return (
@@ -135,20 +167,29 @@ const Dashboard = () => {
                     <div
                       className="entry-cover"
                       style={{
-                        backgroundImage: `url(${entry.coverImage || 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=800&q=80'})`
+                        backgroundImage: `url(${entry.coverImage || "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=800&q=80"})`,
                       }}
                     >
                       <div className="cover-overlay"></div>
                       <div className="entry-number">MEMOIR #{displayId}</div>
                     </div>
                     <div className="entry-content">
-                      <h3 className="entry-title">{entry.title || "Untitled Adventure"}</h3>
+                      <h3 className="entry-title">
+                        {entry.title || "Untitled Adventure"}
+                      </h3>
                       <div className="entry-meta">
-                        <span className="location">📍 {entry.location || "Unknown Location"}</span>
-                        <span className="date">📅 {new Date(displayDate).toLocaleDateString()}</span>
+                        <span className="location">
+                          📍 {entry.location || "Unknown Location"}
+                        </span>
+                        <span className="date">
+                          📅 {new Date(displayDate).toLocaleDateString()}
+                        </span>
                       </div>
                       <p className="entry-excerpt">
-                        {entry.excerpt || entry.story?.slice(0, 100) + (entry.story?.length > 100 ? "..." : "") || "No content provided..."}
+                        {entry.excerpt ||
+                          entry.story?.slice(0, 100) +
+                            (entry.story?.length > 100 ? "..." : "") ||
+                          "No content provided..."}
                       </p>
                       <button className="read-btn">Read Entry</button>
                     </div>
@@ -160,7 +201,9 @@ const Dashboard = () => {
                 <div className="empty-state-icon">✍️</div>
                 <h3>No stories yet</h3>
                 <p>Your journey in Nepal is waiting to be written.</p>
-                <button className="btn-primary" onClick={handleNewEntry}>Write First Entry</button>
+                <button className="btn-primary" onClick={handleNewEntry}>
+                  Write First Entry
+                </button>
               </div>
             )}
           </div>
