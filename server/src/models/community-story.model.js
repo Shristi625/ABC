@@ -1,42 +1,37 @@
 import mongoose from "mongoose";
 
-const CommunityStorySchema = new mongoose.Schema({
-  title: {
-    type: String,
-    required: true,
-    trim: true,
-  },
-  content: {
-    type: String,
-    required: true,
-  },
-  author: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
-    required: true,
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now,
-  },
-  updatedAt: {
-    type: Date,
-    default: Date.now,
-  },
-  likes: [
-    {
+const CommunityStorySchema = new mongoose.Schema(
+  {
+    author: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
+      required: true,
     },
-  ],
-  comments: [
-    {
-      user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-      comment: String,
-      createdAt: { type: Date, default: Date.now },
+
+    content: {
+      type: String,
+      required: true,
+      trim: true,
     },
-  ],
-});
+
+    image: {
+      type: String,
+    },
+
+    likesCount: {
+      type: Number,
+      default: 0,
+    },
+
+    viewsCount: {
+      type: Number,
+      default: 0,
+    },
+  },
+  {
+    timestamps: true,
+  },
+);
 
 CommunityStorySchema.pre("save", function (next) {
   this.updatedAt = Date.now();

@@ -1,10 +1,13 @@
 import express from "express";
+const router = express.Router();
 import {
   createStory,
   getStories,
   getStoryById,
   updateStory,
   deleteStory,
+  likeStory,
+  viewStory,
 } from "../controllers/community-story.controller.js";
 import authenticate from "../middlewares/authenticate.middleware.js";
 import {
@@ -13,7 +16,11 @@ import {
 } from "../validators/community-story.validator.js";
 import validateRequest from "../middlewares/validate-request.middleware.js";
 
-const router = express.Router();
+// Like a story
+router.post("/:id/like", authenticate, likeStory);
+
+// View a story (increment view count)
+router.post("/:id/view", viewStory);
 
 // Create a story (auth required)
 router.post(

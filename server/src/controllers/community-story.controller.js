@@ -1,11 +1,33 @@
-import CommunityStory from "../models/community-story.model.js";
 import asyncHandler from "../middlewares/async-handler.middleware.js";
+import CommunityStory from "../models/community-story.model.js";
+
+// Like a community story
+export const likeStory = asyncHandler(async (req, res) => {
+  const story = await CommunityStory.findById(req.params.id);
+  if (!story) {
+    return res.status(404).json({ message: "Story not found" });
+  }
+  story.likesCount += 1;
+  await story.save();
+  res.json({ likesCount: story.likesCount });
+});
+
+// Increment view count for a community story
+export const viewStory = asyncHandler(async (req, res) => {
+  const story = await CommunityStory.findById(req.params.id);
+  if (!story) {
+    return res.status(404).json({ message: "Story not found" });
+  }
+  story.viewsCount += 1;
+  await story.save();
+  res.json({ viewsCount: story.viewsCount });
+});
 
 // Create a new community story
 export const createStory = asyncHandler(async (req, res) => {
-  const { title, content } = req.body;
+  const { content, image } = req.body;
   const author = req.user._id;
-  const story = await CommunityStory.create({ title, content, author });
+  const story = await CommunityStory.create({ content, image, author });
   res.status(201).json(story);
 });
 
@@ -31,7 +53,7 @@ export const getStoryById = asyncHandler(async (req, res) => {
 
 // Update a community story
 export const updateStory = asyncHandler(async (req, res) => {
-  const { title, content } = req.body;
+  const { content, image } = req.body;
   const story = await CommunityStory.findById(req.params.id);
   if (!story) {
     return res.status(404).json({ message: "Story not found" });
@@ -40,8 +62,8 @@ export const updateStory = asyncHandler(async (req, res) => {
   if (story.author.toString() !== req.user._id.toString()) {
     return res.status(403).json({ message: "Not authorized" });
   }
-  story.title = title || story.title;
-  story.content = content || story.content;
+  if (content !== undefined) story.content = content;
+  if (image !== undefined) story.image = image;
   await story.save();
   res.json(story);
 });
