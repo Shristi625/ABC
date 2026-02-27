@@ -20,13 +20,45 @@
   border-radius: 6px;
   font-size: 14px;
 }
-.moment-form .textarea { resize: vertical; }
-.moment-form .form-actions { display:flex; gap:10px; }
-.entries-list { display:flex; flex-direction:column; gap:12px; max-width:820px; }
-.entry-card { background: #fff; border-radius:8px; padding:12px; border:1px solid #eee; }
-.entry-header { display:flex; justify-content:space-between; align-items:center; gap:12px; }
-.entry-title { font-size:16px; }
-.entry-meta { color:#777; font-size:12px; }
-.entry-content { margin-top:8px; color:#333; }
-.no-entries { color:#666; }
-.error { color:#b00020; }
+.moment-form .textarea {
+  resize: vertical;
+}
+.moment-form .form-actions {
+  display: flex;
+  gap: 10px;
+}
+.entries-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 820px;
+}
+.entry-card {
+  background: #fff;
+  border-radius: 8px;
+  padding: 12px;
+  border: 1px solid #eee;
+}
+.entry-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+.entry-title {
+  font-size: 16px;
+}
+.entry-meta {
+  color: #777;
+  font-size: 12px;
+}
+.entry-content {
+  margin-top: 8px;
+  color: #333;
+}
+.no-entries {
+  color: #666;
+}
+.error {
+  color: #b00020;
+}

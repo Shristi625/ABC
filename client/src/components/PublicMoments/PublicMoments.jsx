@@ -1,111 +1,107 @@
 import React, { useEffect, useState } from "react";
 import "./PublicMoments.css";
-
-const STORAGE_KEY = "publicMoments";
+import axios from "../../lib/axios";
 
 const PublicMoments = () => {
   const [entries, setEntries] = useState([]);
-  const [form, setForm] = useState({ author: "", title: "", content: "" });
   const [error, setError] = useState("");
 
   useEffect(() => {
-    try {
-      const raw = localStorage.getItem(STORAGE_KEY);
-      if (raw) setEntries(JSON.parse(raw));
-    } catch (e) {
-      console.error("Failed to read public moments:", e);
-    }
-  }, []);
-
-  useEffect(() => {
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(entries));
-    } catch (e) {
-      console.error("Failed to save public moments:", e);
-    }
-  }, [entries]);
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setForm((p) => ({ ...p, [name]: value }));
-    setError("");
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!form.title.trim() || !form.content.trim()) {
-      setError("Please add a title and a short moment.");
-      return;
-    }
-
-    const entry = {
-      id: Date.now(),
-      author: form.author.trim() || "Anonymous",
-      title: form.title.trim(),
-      content: form.content.trim(),
-      createdAt: new Date().toISOString(),
+    const fetchStories = async () => {
+      try {
+        const res = await axios.get("/v1/community-stories");
+        setEntries(res.data || []);
+      } catch (e) {
+        setError("Failed to load public moments.");
+        console.error("Failed to fetch public moments:", e);
+      }
     };
-
-    setEntries((prev) => [entry, ...prev]);
-    setForm({ author: "", title: "", content: "" });
-  };
-
-  const handleClear = () => {
-    if (!window.confirm("Clear all public moments?")) return;
-    setEntries([]);
-  };
+    fetchStories();
+  }, []);
 
   return (
     <section id="public-moments" className="public-moments">
       <div className="container">
         <h2 className="section-title">Share a Moment</h2>
-        <p className="section-sub">Write a quick public entry to share with the community.</p>
-
-        <form className="moment-form" onSubmit={handleSubmit}>
-          <input
-            name="author"
-            value={form.author}
-            onChange={handleChange}
-            placeholder="Your name (optional)"
-            className="input"
-          />
-          <input
-            name="title"
-            value={form.title}
-            onChange={handleChange}
-            placeholder="Title"
-            className="input"
-          />
-          <textarea
-            name="content"
-            value={form.content}
-            onChange={handleChange}
-            placeholder="Write your moment..."
-            className="textarea"
-            rows={4}
-          />
-          {error && <div className="error">{error}</div>}
-          <div className="form-actions">
-            <button type="submit" className="btn btn-primary">Share Publicly</button>
-            <button type="button" className="btn btn-outline" onClick={handleClear}>Clear All</button>
-          </div>
-        </form>
-
+        <p className="section-sub">
+          Write a quick public entry to share with the community.
+        </p>
         <div className="entries-list">
           {entries.length === 0 ? (
-            <div className="no-entries">No public moments yet — be the first!</div>
+            <div className="no-entries">No public moments yet.</div>
           ) : (
-            entries.map((e) => (
-              <article key={e.id} className="entry-card">
-                <div className="entry-header">
-                  <strong className="entry-title">{e.title}</strong>
-                  <span className="entry-meta">{new Date(e.createdAt).toLocaleString()} • {e.author}</span>
+            entries.map((e) => {
+              const handleLike = async () => {
+                try {
+                  await axios.post(
+                    `/v1/community-stories/${e._id || e.id}/like`,
+                  );
+                  setEntries((prev) =>
+                    prev.map((story) =>
+                      (story._id || story.id) === (e._id || e.id)
+                        ? { ...story, likes: (story.likes || 0) + 1 }
+                        : story,
+                    ),
+                  );
+                } catch (err) {
+                  setError("Failed to like story.");
+                }
+              };
+              const handleView = async () => {
+                try {
+                  await axios.post(
+                    `/v1/community-stories/${e._id || e.id}/view`,
+                  );
+                  setEntries((prev) =>
+                    prev.map((story) =>
+                      (story._id || story.id) === (e._id || e.id)
+                        ? { ...story, views: (story.views || 0) + 1 }
+                        : story,
+                    ),
+                  );
+                } catch (err) {
+                  setError("Failed to update views.");
+                }
+              };
+              return (
+                <div key={e._id || e.id} className="community-card">
+                  <div className="card-header">
+                    <img
+                      src={e.imageUrl || "/public/logo/default-story.png"}
+                      alt="Story"
+                      className="card-image"
+                    />
+                    <div className="card-meta">
+                      <span className="card-author">{e.author}</span>
+                      <span className="card-date">
+                        {e.createdAt
+                          ? new Date(e.createdAt).toLocaleString()
+                          : ""}
+                      </span>
+                    </div>
+                  </div>
+                  <div className="card-content">
+                    <strong className="card-title">{e.title}</strong>
+                    <p>{e.content}</p>
+                  </div>
+                  <div className="card-actions">
+                    <button className="like-btn" onClick={handleLike}>
+                      ❤️ Like {e.likes || 0}
+                    </button>
+                    <span
+                      className="views"
+                      style={{ cursor: "pointer" }}
+                      onClick={handleView}
+                    >
+                      👁️ {e.views || 0} views
+                    </span>
+                  </div>
                 </div>
-                <p className="entry-content">{e.content}</p>
-              </article>
-            ))
+              );
+            })
           )}
         </div>
+        {error && <div className="error">{error}</div>}
       </div>
     </section>
   );
