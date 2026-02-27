@@ -26,7 +26,18 @@ const StoryForm = ({ initialData, onSubmit, onCancel }) => {
     const formData = new FormData();
     formData.append("content", content);
     if (image) formData.append("image", image);
-    onSubmit(formData);
+    // Log values before submit
+    console.log("StoryForm: content", content);
+    console.log("StoryForm: image", image);
+    // Log FormData entries
+    for (let pair of formData.entries()) {
+      console.log(`StoryForm: FormData entry`, pair[0], pair[1]);
+    }
+    if (typeof onSubmit === "function") {
+      onSubmit(formData);
+    } else {
+      console.error("StoryForm: onSubmit is not a function", onSubmit);
+    }
   };
 
   return (

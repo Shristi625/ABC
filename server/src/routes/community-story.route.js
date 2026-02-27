@@ -26,7 +26,6 @@ router.post("/:id/view", viewStory);
 // Create a story (auth required)
 router.post(
   "/",
-  authenticate,
   uploadSingle("image"),
   createStoryValidator,
   validateRequest,

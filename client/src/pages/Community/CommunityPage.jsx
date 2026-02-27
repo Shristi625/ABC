@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import CommunityStoriesPageWithStore from "./CommunityStoriesPage";
 import "./Community.css";
 
 const CommunityPage = () => {
@@ -13,20 +14,8 @@ const CommunityPage = () => {
           </p>
         </header>
 
-        <section className="community-placeholder">
-          <div className="placeholder-card">
-            <h3>No public diaries yet</h3>
-            <p>
-              When users set their diaries to public, they'll appear here for
-              everyone to explore.
-            </p>
-            <hr style={{ margin: "2rem 0" }} />
-            <h3>✨ Community Stories</h3>
-            <p>Read and share stories with the community!</p>
-            <Link to="/community/stories" className="community-stories-link">
-              Go to Community Stories
-            </Link>
-          </div>
+        <section className="community-stories-list">
+          <CommunityStoriesPageWithStore />
         </section>
       </div>
     </div>

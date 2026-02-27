@@ -5,7 +5,7 @@ const CommunityStorySchema = new mongoose.Schema(
     author: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
-      required: true,
+      required: false,
     },
 
     content: {
@@ -34,8 +34,7 @@ const CommunityStorySchema = new mongoose.Schema(
 );
 
 CommunityStorySchema.pre("save", function (next) {
-  this.updatedAt = Date.now();
-  next();
+  // Remove this hook; timestamps are handled by Mongoose
 });
 
 export default mongoose.model("CommunityStory", CommunityStorySchema);

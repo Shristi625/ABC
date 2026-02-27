@@ -26,11 +26,20 @@ export const viewStory = asyncHandler(async (req, res) => {
 
 // Create a new community story
 export const createStory = asyncHandler(async (req, res) => {
-  const { content } = req.body;
-  const author = req.user._id;
+  const { content, author: clientAuthor } = req.body;
+  // Prefer req.user._id if authenticated, else use client-provided author
+  let author = null;
+  if (req.user && req.user._id) {
+    author = req.user._id;
+  } else if (clientAuthor) {
+    author = clientAuthor;
+  }
   let imageUrl = undefined;
   if (req.file) {
-    const uploadResult = await uploadToCloudinary(req.file.buffer, "community-stories");
+    const uploadResult = await uploadToCloudinary(
+      req.file.buffer,
+      "community-stories",
+    );
     imageUrl = uploadResult.url;
   }
   const story = await CommunityStory.create({

@@ -1,4 +1,5 @@
 import React, { useEffect, useState, createContext, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   fetchStories,
   createStory,
@@ -7,6 +8,16 @@ import {
 } from "../../services/community-story";
 import StoryCard from "../../components/CommunityStories/StoryCard";
 import StoryForm from "../../components/CommunityStories/StoryForm";
+
+// Get current user from localStorage
+function getCurrentUser() {
+  try {
+    const user = localStorage.getItem("user");
+    return user ? JSON.parse(user) : null;
+  } catch {
+    return null;
+  }
+}
 import "./CommunityStoriesPage.css";
 
 // Context for stories store
@@ -38,6 +49,10 @@ function StoriesProvider({ children }) {
 
   const addStory = async (story) => {
     try {
+      const user = getCurrentUser();
+      if (user && user._id) {
+        story.append("author", user._id);
+      }
       const newStory = await createStory(story);
       setStories((prev) => [newStory, ...prev]);
       return true;
@@ -49,6 +64,10 @@ function StoriesProvider({ children }) {
 
   const editStory = async (id, story) => {
     try {
+      const user = getCurrentUser();
+      if (user && user._id) {
+        story.append("author", user._id);
+      }
       const updated = await updateStory(id, story);
       setStories((prev) => prev.map((s) => (s._id === id ? updated : s)));
       return true;
@@ -87,6 +106,7 @@ function StoriesProvider({ children }) {
 }
 
 const CommunityStoriesPage = () => {
+  const navigate = useNavigate();
   const {
     stories,
     loading,
@@ -101,7 +121,10 @@ const CommunityStoriesPage = () => {
 
   const handleCreate = async (story) => {
     const ok = await addStory(story);
-    if (ok) setShowForm(false);
+    if (ok) {
+      setShowForm(false);
+      navigate("/community");
+    }
   };
 
   const handleEdit = (story) => {
@@ -157,14 +180,21 @@ const CommunityStoriesPage = () => {
             {stories.length === 0 ? (
               <div>No stories yet.</div>
             ) : (
-              stories.map((story) => (
-                <StoryCard
-                  key={story._id}
-                  story={story}
-                  onDelete={handleDelete}
-                  onEdit={handleEdit}
-                />
-              ))
+              stories.map((story) => {
+                const user = getCurrentUser();
+                const isAuthor =
+                  user &&
+                  story.author &&
+                  (story.author._id === user._id || story.author === user._id);
+                return (
+                  <StoryCard
+                    key={story._id}
+                    story={story}
+                    onDelete={isAuthor ? handleDelete : undefined}
+                    onEdit={isAuthor ? handleEdit : undefined}
+                  />
+                );
+              })
             )}
           </div>
         )}
@@ -173,13 +203,15 @@ const CommunityStoriesPage = () => {
         <h4>Recent Stories</h4>
         <ul>
           {recentStories.map((story) => (
-            <li key={story._id} title={story.title}>
+            <li key={story._id} title={story.title || "Untitled Story"}>
               <span role="img" aria-label="story">
                 📖
               </span>{" "}
-              {story.title.length > 30
-                ? story.title.slice(0, 30) + "…"
-                : story.title}
+              {story.title && typeof story.title === "string"
+                ? story.title.length > 30
+                  ? story.title.slice(0, 30) + "…"
+                  : story.title
+                : "Untitled Story"}
             </li>
           ))}
         </ul>

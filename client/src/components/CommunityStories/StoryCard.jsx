@@ -4,6 +4,11 @@ import "./StoryCard.css";
 const StoryCard = ({ story, onDelete, onEdit }) => {
   return (
     <div className="story-card">
+      {story.image && (
+        <div className="story-image-wrap">
+          <img src={story.image} alt="Story" className="story-image" />
+        </div>
+      )}
       <h3>{story.title}</h3>
       <p>{story.content}</p>
       <div className="story-meta">
@@ -11,9 +16,29 @@ const StoryCard = ({ story, onDelete, onEdit }) => {
         <span>{new Date(story.createdAt).toLocaleString()}</span>
       </div>
       <div className="story-actions">
-        {onEdit && <button onClick={() => onEdit(story)}>Edit</button>}
+        {onEdit && (
+          <button
+            className="edit-btn"
+            title="Edit"
+            onClick={() => onEdit(story)}
+          >
+            <span role="img" aria-label="edit">
+              ✏️
+            </span>{" "}
+            Edit
+          </button>
+        )}
         {onDelete && (
-          <button onClick={() => onDelete(story._id)}>Delete</button>
+          <button
+            className="delete-btn"
+            title="Delete"
+            onClick={() => onDelete(story._id)}
+          >
+            <span role="img" aria-label="delete">
+              🗑️
+            </span>{" "}
+            Delete
+          </button>
         )}
       </div>
     </div>
