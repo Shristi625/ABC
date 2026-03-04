@@ -1,8 +1,8 @@
 import axios from "axios";
 
 const api = axios.create({
-  // Prefer explicit BASE_URL; fall back to older var name or localhost
-  baseURL: import.meta.env.VITE_API_BASE_URL || "http://localhost:5000",
+  // Prefer explicit BASE_URL; default to same-origin so Vite proxy handles /api in dev
+  baseURL: import.meta.env.VITE_API_BASE_URL || "",
   withCredentials: true,
 });
 

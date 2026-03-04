@@ -6,6 +6,10 @@ const PublicMoments = () => {
   const [entries, setEntries] = useState([]);
   const [error, setError] = useState("");
 
+  const getStoryId = (story) => story._id || story.id;
+  const getLikes = (story) => story.likesCount ?? story.likes ?? 0;
+  const getViews = (story) => story.viewsCount ?? story.views ?? 0;
+
   useEffect(() => {
     const fetchStories = async () => {
       try {
@@ -33,29 +37,47 @@ const PublicMoments = () => {
             entries.map((e) => {
               const handleLike = async () => {
                 try {
-                  await axios.post(
-                    `/api/v1/community-stories/${e._id || e.id}/like`,
+                  const storyId = getStoryId(e);
+                  if (!storyId) return;
+
+                  const res = await axios.post(
+                    `/api/v1/community-stories/${storyId}/like`,
                   );
                   setEntries((prev) =>
                     prev.map((story) =>
-                      (story._id || story.id) === (e._id || e.id)
-                        ? { ...story, likes: (story.likes || 0) + 1 }
+                      getStoryId(story) === storyId
+                        ? {
+                            ...story,
+                            likesCount:
+                              res.data?.likesCount ?? getLikes(story) + 1,
+                          }
                         : story,
                     ),
                   );
                 } catch (err) {
-                  setError("Failed to like story.");
+                  setError(
+                    err?.response?.status === 401
+                      ? "Please login to like a story."
+                      : "Failed to like story.",
+                  );
                 }
               };
               const handleView = async () => {
                 try {
-                  await axios.post(
-                    `/api/v1/community-stories/${e._id || e.id}/view`,
+                  const storyId = getStoryId(e);
+                  if (!storyId) return;
+
+                  const res = await axios.post(
+                    `/api/v1/community-stories/${storyId}/view`,
                   );
                   setEntries((prev) =>
                     prev.map((story) =>
-                      (story._id || story.id) === (e._id || e.id)
-                        ? { ...story, views: (story.views || 0) + 1 }
+                      getStoryId(story) === storyId
+                        ? {
+                            ...story,
+                            viewsCount:
+                              res.data?.viewsCount ?? getViews(story) + 1,
+                          }
                         : story,
                     ),
                   );
@@ -64,7 +86,7 @@ const PublicMoments = () => {
                 }
               };
               return (
-                <div key={e._id || e.id} className="community-card">
+                <div key={getStoryId(e)} className="community-card">
                   <div className="card-image-wrap">
                     <img
                       src={e.image || e.imageUrl || "/logo/default-story.png"}
@@ -93,23 +115,29 @@ const PublicMoments = () => {
                       <p>{e.content}</p>
                     </div>
                     <div className="card-actions">
+                      <div className="like-group">
+                        <button
+                          type="button"
+                          className="like-btn"
+                          onClick={handleLike}
+                          title="Like"
+                          aria-label="Like story"
+                        >
+                          <span role="img" aria-label="like">
+                            ❤️
+                          </span>
+                        </button>
+                        <span className="like-count">{getLikes(e)}</span>
+                      </div>
                       <button
-                        className="like-btn"
-                        onClick={handleLike}
-                        title="Like"
-                      >
-                        <span role="img" aria-label="like">
-                          ❤️
-                        </span>
-                      </button>
-                      <span className="like-count">{e.likes || 0}</span>
-                      <span
-                        className="views"
-                        style={{ cursor: "pointer" }}
+                        type="button"
+                        className="views-btn"
                         onClick={handleView}
+                        title="View story"
+                        aria-label="View story"
                       >
-                        👁️ {e.views || 0} views
-                      </span>
+                        <span className="views">👁️ {getViews(e)} views</span>
+                      </button>
                     </div>
                   </div>
                 </div>

@@ -33,8 +33,4 @@ const CommunityStorySchema = new mongoose.Schema(
   },
 );
 
-CommunityStorySchema.pre("save", function (next) {
-  // Remove this hook; timestamps are handled by Mongoose
-});
-
 export default mongoose.model("CommunityStory", CommunityStorySchema);

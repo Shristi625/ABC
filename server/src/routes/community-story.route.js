@@ -18,7 +18,7 @@ import {
 import validateRequest from "../middlewares/validate-request.middleware.js";
 
 // Like a story
-router.post("/:id/like", authenticate, likeStory);
+router.post("/:id/like", authenticate(), likeStory);
 
 // View a story (increment view count)
 router.post("/:id/view", viewStory);
@@ -26,6 +26,7 @@ router.post("/:id/view", viewStory);
 // Create a story (auth required)
 router.post(
   "/",
+  authenticate(),
   uploadSingle("image"),
   createStoryValidator,
   validateRequest,
@@ -41,13 +42,13 @@ router.get("/:id", getStoryById);
 // Update a story (auth required)
 router.put(
   "/:id",
-  authenticate,
+  authenticate(),
   updateStoryValidator,
   validateRequest,
   updateStory,
 );
 
 // Delete a story (auth required)
-router.delete("/:id", authenticate, deleteStory);
+router.delete("/:id", authenticate(), deleteStory);
 
 export default router;
