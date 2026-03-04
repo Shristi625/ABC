@@ -1,49 +1,110 @@
-import React, { useState } from 'react';
-import './Settings.css';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { changeUserPassword, deleteUserAccount } from "../../services/user";
+import "./Settings.css";
 
 const Settings = () => {
+  const navigate = useNavigate();
   const [settings, setSettings] = useState({
     darkMode: false,
-    language: 'english',
+    language: "english",
     notifications: true,
-    emailUpdates: true
+    emailUpdates: true,
   });
 
   const [password, setPassword] = useState({
-    current: '',
-    new: '',
-    confirm: ''
+    current: "",
+    new: "",
+    confirm: "",
   });
 
+  const [isSaving, setIsSaving] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
+
   const handleSettingChange = (key, value) => {
-    setSettings(prev => ({
+    setSettings((prev) => ({
       ...prev,
-      [key]: value
+      [key]: value,
     }));
   };
 
   const handlePasswordChange = (e) => {
     const { name, value } = e.target;
-    setPassword(prev => ({
+    setPassword((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
-  const handleSaveChanges = (e) => {
+  const handleSaveChanges = async (e) => {
     e.preventDefault();
-    console.log('Settings saved:', settings);
-    console.log('Password change requested');
-    alert('Settings saved successfully!');
+
+    if (!password.current || !password.new || !password.confirm) {
+      alert(
+        "Please fill current password, new password, and confirm password.",
+      );
+      return;
+    }
+
+    if (password.new !== password.confirm) {
+      alert("New password and confirm password do not match.");
+      return;
+    }
+
+    try {
+      setIsSaving(true);
+      const response = await changeUserPassword({
+        currentPassword: password.current,
+        newPassword: password.new,
+      });
+
+      alert(response?.data?.message || "Password changed successfully!");
+      setPassword({
+        current: "",
+        new: "",
+        confirm: "",
+      });
+      console.log("Settings saved:", settings);
+    } catch (error) {
+      alert(
+        error?.response?.data?.message ||
+          "Failed to change password. Please try again.",
+      );
+    } finally {
+      setIsSaving(false);
+    }
   };
 
   const handleExportDiaries = () => {
-    alert('Export functionality would be available with full backend integration');
+    alert(
+      "Export functionality would be available with full backend integration",
+    );
   };
 
-  const handleDeleteAccount = () => {
-    if (window.confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
-      alert('Account deletion request sent. This feature requires backend integration.');
+  const handleDeleteAccount = async () => {
+    if (
+      window.confirm(
+        "Are you sure you want to delete your account? This action cannot be undone.",
+      )
+    ) {
+      try {
+        setIsDeleting(true);
+        await deleteUserAccount();
+
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+        sessionStorage.removeItem("token");
+
+        alert("Account deleted successfully.");
+        navigate("/login");
+      } catch (error) {
+        alert(
+          error?.response?.data?.message ||
+            "Failed to delete account. Please try again.",
+        );
+      } finally {
+        setIsDeleting(false);
+      }
     }
   };
 
@@ -55,16 +116,17 @@ const Settings = () => {
           {/* Page Header */}
           <header className="settings-header">
             <h1 className="settings-title">Settings</h1>
-            <p className="settings-subtitle">Manage your account and preferences.</p>
+            <p className="settings-subtitle">
+              Manage your account and preferences.
+            </p>
           </header>
 
           {/* Settings Form */}
           <form className="settings-form" onSubmit={handleSaveChanges}>
-            
             {/* Account Settings */}
             <section className="settings-section">
               <h2 className="section-title">Account Settings</h2>
-              
+
               <div className="setting-item">
                 <label className="setting-label">Email Address</label>
                 <div className="readonly-field">
@@ -107,21 +169,21 @@ const Settings = () => {
             {/* Appearance */}
             <section className="settings-section">
               <h2 className="section-title">Appearance</h2>
-              
+
               <div className="setting-item">
                 <label className="setting-label">Theme Preference</label>
                 <div className="theme-toggle">
                   <button
                     type="button"
-                    className={`theme-option ${!settings.darkMode ? 'active' : ''}`}
-                    onClick={() => handleSettingChange('darkMode', false)}
+                    className={`theme-option ${!settings.darkMode ? "active" : ""}`}
+                    onClick={() => handleSettingChange("darkMode", false)}
                   >
                     Light Mode
                   </button>
                   <button
                     type="button"
-                    className={`theme-option ${settings.darkMode ? 'active' : ''}`}
-                    onClick={() => handleSettingChange('darkMode', true)}
+                    className={`theme-option ${settings.darkMode ? "active" : ""}`}
+                    onClick={() => handleSettingChange("darkMode", true)}
                   >
                     Dark Mode
                   </button>
@@ -132,20 +194,23 @@ const Settings = () => {
             {/* Language */}
             <section className="settings-section">
               <h2 className="section-title">Language</h2>
-              
+
               <div className="setting-item">
                 <label className="setting-label">Preferred Language</label>
                 <div className="language-selector">
                   <select
                     className="setting-select"
                     value={settings.language}
-                    onChange={(e) => handleSettingChange('language', e.target.value)}
+                    onChange={(e) =>
+                      handleSettingChange("language", e.target.value)
+                    }
                   >
                     <option value="english">English</option>
                     <option value="nepali">नेपाली (Nepali)</option>
                   </select>
                   <div className="language-note">
-                    Choose your preferred language for the application interface.
+                    Choose your preferred language for the application
+                    interface.
                   </div>
                 </div>
               </div>
@@ -154,7 +219,7 @@ const Settings = () => {
             {/* Notifications */}
             <section className="settings-section">
               <h2 className="section-title">Notifications</h2>
-              
+
               <div className="setting-item">
                 <div className="toggle-container">
                   <label className="toggle-label">
@@ -163,14 +228,17 @@ const Settings = () => {
                       <input
                         type="checkbox"
                         checked={settings.notifications}
-                        onChange={(e) => handleSettingChange('notifications', e.target.checked)}
+                        onChange={(e) =>
+                          handleSettingChange("notifications", e.target.checked)
+                        }
                         className="toggle-input"
                       />
                       <span className="toggle-slider"></span>
                     </div>
                   </label>
                   <p className="toggle-description">
-                    Receive notifications for new comments and likes on your diaries
+                    Receive notifications for new comments and likes on your
+                    diaries
                   </p>
                 </div>
               </div>
@@ -183,7 +251,9 @@ const Settings = () => {
                       <input
                         type="checkbox"
                         checked={settings.emailUpdates}
-                        onChange={(e) => handleSettingChange('emailUpdates', e.target.checked)}
+                        onChange={(e) =>
+                          handleSettingChange("emailUpdates", e.target.checked)
+                        }
                         className="toggle-input"
                       />
                       <span className="toggle-slider"></span>
@@ -199,11 +269,12 @@ const Settings = () => {
             {/* Data & Privacy */}
             <section className="settings-section">
               <h2 className="section-title">Data & Privacy</h2>
-              
+
               <div className="setting-item">
                 <label className="setting-label">Export Your Data</label>
                 <p className="setting-description">
-                  Download all your travel diaries and personal data in a portable format.
+                  Download all your travel diaries and personal data in a
+                  portable format.
                 </p>
                 <button
                   type="button"
@@ -217,22 +288,24 @@ const Settings = () => {
               <div className="setting-item">
                 <label className="setting-label">Account Management</label>
                 <p className="setting-description warning-text">
-                  This action is permanent and cannot be undone. All your data will be deleted.
+                  This action is permanent and cannot be undone. All your data
+                  will be deleted.
                 </p>
                 <button
                   type="button"
                   className="delete-button"
+                  disabled={isDeleting}
                   onClick={handleDeleteAccount}
                 >
-                  Delete Account
+                  {isDeleting ? "Deleting..." : "Delete Account"}
                 </button>
               </div>
             </section>
 
             {/* Save Button */}
             <div className="save-section">
-              <button type="submit" className="save-button">
-                Save Changes
+              <button type="submit" className="save-button" disabled={isSaving}>
+                {isSaving ? "Saving..." : "Save Changes"}
               </button>
               <p className="save-note">
                 Your preferences will be applied immediately

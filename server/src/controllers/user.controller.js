@@ -89,6 +89,32 @@ export const updateUserProfileController = async (req, res, next) => {
   }
 };
 
+// Change user password
+export const changePasswordController = async (req, res, next) => {
+  try {
+    const { currentPassword, newPassword } = req.body;
+
+    const user = await User.findById(req.user.userId).select("+password");
+
+    if (!user) {
+      throw new APIError(404, "User not found");
+    }
+
+    const isCurrentPasswordValid = user.comparePassword(currentPassword);
+
+    if (!isCurrentPasswordValid) {
+      throw new APIError(401, "Current password is incorrect");
+    }
+
+    user.password = newPassword;
+    await user.save();
+
+    successResponse(res, 200, "Password changed successfully", null);
+  } catch (error) {
+    next(error);
+  }
+};
+
 // Get user by ID (for public profiles)
 export const getUserByIdController = async (req, res, next) => {
   try {

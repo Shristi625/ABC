@@ -7,6 +7,10 @@ export const getUserProfile = () => api.get("/api/v1/users/profile");
 export const updateUserProfile = (formData) =>
   api.put("/api/v1/users/profile", formData);
 
+// Change user password
+export const changeUserPassword = (payload) =>
+  api.put("/api/v1/users/change-password", payload);
+
 // Get user by ID
 export const getUserById = (id) => api.get(`/api/v1/users/${id}`);
 
